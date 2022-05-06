@@ -17,5 +17,5 @@ export default function redirect(req: Request, res: Response) {
     params.append(k, extra[k] as string);
   });
 
-  return res.redirect(307, `${stored.redirect_uri}${params.toString()}`);
+  return res.redirect(307, `${stored.redirect_uri}&${params.toString()}`);
 }

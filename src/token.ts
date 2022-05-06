@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { find } from "./store";
 
-const secret = "c843219a-d93c-403c-8e4d-e8aa9a987494";
+const secret = "secret_8THB2z6RB1CvTc0sqIDditbyNWUqWlQs0f41Drikklx";
 const tokenURL = "https://api.notion.com/v1/oauth/token";
 
 export default function token(req: Request, res: Response) {

@@ -12,6 +12,7 @@ export default function authorize(req: Request, res: Response) {
     code_challenge_method,
     ...extra
   } = req.query;
+  console.log(req.query);
 
   add(client_id, redirect_uri, { code_challenge, code_challenge_method });
 

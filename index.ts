@@ -1,12 +1,12 @@
-import express from 'express';
-import path from 'path';
+import express from "express";
+import authorize from "./src/authorize";
+import token from "./src/token";
 
 const PORT = process.env.PORT || 5000;
 const server = express();
 
-express()
-  .use(express.static(path.join(__dirname, '../public')))
-  .set('views', path.join(__dirname, '../views'))
-  .set('view engine', 'ejs')
-  .get('/', (req, res) => res.render('pages/index'))
+server
+  .get("/", (req, res) => res.send("Alive"))
+  .get("/authorize", authorize)
+  .post("/token", token)
   .listen(PORT, () => console.log(`Listening on ${PORT}`));

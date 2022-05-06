@@ -21,6 +21,7 @@ export default function authorize(req: Request, res: Response) {
 
   const params = new URLSearchParams();
   params.append("client_id", client_id as string);
+  params.append("state", state as string);
   params.append(
     "redirect_uri",
     `https://raycast-notion-pkce-proxy.herokuapp.com/redirect`

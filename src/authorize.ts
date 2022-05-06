@@ -10,15 +10,21 @@ export default function authorize(req: Request, res: Response) {
     redirect_uri,
     code_challenge,
     code_challenge_method,
+    state,
     ...extra
   } = req.query;
-  console.log(req.query);
 
-  add(client_id, redirect_uri, { code_challenge, code_challenge_method });
+  add(client_id, redirect_uri, state, {
+    code_challenge,
+    code_challenge_method,
+  });
 
   const params = new URLSearchParams();
   params.append("client_id", client_id as string);
-  params.append("redirect_uri", redirect_uri as string);
+  params.append(
+    "redirect_uri",
+    `https://raycast-notion-pkce-proxy.herokuapp.com/redirect`
+  );
   Object.keys(extra).forEach((k) => {
     params.append(k, extra[k] as string);
   });

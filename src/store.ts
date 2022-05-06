@@ -1,29 +1,30 @@
 type Store = {
   client_id: any;
   redirect_uri: any;
+  state: any;
   pkce: { code_challenge: any; code_challenge_method: any };
   expiration: number;
 };
 
-const store: Record<number, Store> = {};
-let current_id = 0;
+const store: Record<string, Store> = {};
 
 export function add(
   client_id: any,
   redirect_uri: any,
+  state: any,
   pkce: { code_challenge: any; code_challenge_method: any }
 ) {
-  const id = current_id++;
-  store[id] = {
+  store[state] = {
     client_id,
     redirect_uri,
     pkce,
-    expiration: Date.now() + 180 * 1000,
+    state,
+    expiration: Date.now() + 500 * 1000,
   };
 
   setTimeout(() => {
-    delete store[id];
-  }, 180 * 1000);
+    delete store[state];
+  }, 500 * 1000);
 }
 
 export function find(client_id: any, redirect_uri: any, code_verifier: any) {
@@ -38,6 +39,10 @@ export function find(client_id: any, redirect_uri: any, code_verifier: any) {
       ? x.pkce.code_challenge === code_verifier
       : x.pkce.code_challenge === encoded
   );
+}
+
+export function findByState(state: any) {
+  return store[state];
 }
 
 function base64_urlencode(str: string) {

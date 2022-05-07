@@ -35,6 +35,9 @@ export function find(code: any, code_verifier: any) {
 
   const candidate = Object.values(store).find((x) => x.code === code);
 
+  console.log(candidate);
+  console.log(base64_urlencode(code_verifier));
+
   if (
     candidate &&
     (candidate.pkce.code_challenge_method === "plain"

@@ -6,7 +6,6 @@ const tokenURL = "https://api.notion.com/v1/oauth/token";
 
 export default async function token(req: FastifyRequest, res: FastifyReply) {
   const { code_verifier, client_id, code, ...extra } = req.body as any;
-  console.log(req.body);
 
   if (!find(code, code_verifier)) {
     return res.status(400).send("invalid_grant");

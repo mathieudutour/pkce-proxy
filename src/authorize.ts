@@ -1,5 +1,5 @@
 import type { FastifyRequest, FastifyReply } from "fastify";
-import { add } from "./store";
+import { add } from "./sessions";
 
 const authorizeURL = "https://api.notion.com/v1/oauth/authorize";
 

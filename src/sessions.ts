@@ -1,6 +1,6 @@
 import crypto from "crypto";
 
-type Store = {
+type Session = {
   client_id: any;
   redirect_uri: any;
   state: any;
@@ -9,7 +9,7 @@ type Store = {
   expiration: number;
 };
 
-const store: Record<string, Store> = {};
+const sessions: Record<string, Session> = {};
 
 export function add(
   client_id: any,
@@ -17,7 +17,7 @@ export function add(
   state: any,
   pkce: { code_challenge: any; code_challenge_method: any }
 ) {
-  store[state] = {
+  sessions[state] = {
     client_id,
     redirect_uri,
     pkce,
@@ -26,7 +26,7 @@ export function add(
   };
 
   setTimeout(() => {
-    delete store[state];
+    delete sessions[state];
   }, 500 * 1000);
 }
 
@@ -35,10 +35,7 @@ export function find(code: any, code_verifier: any) {
     return;
   }
 
-  const candidate = Object.values(store).find((x) => x.code === code);
-
-  console.log(candidate);
-  console.log(base64_urlencode(code_verifier));
+  const candidate = Object.values(sessions).find((x) => x.code === code);
 
   if (
     candidate &&
@@ -58,7 +55,7 @@ export function find(code: any, code_verifier: any) {
 }
 
 export function findByState(state: any) {
-  return store[state];
+  return sessions[state];
 }
 
 function base64_urlencode(str: string) {

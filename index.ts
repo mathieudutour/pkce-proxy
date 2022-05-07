@@ -1,17 +1,24 @@
-import express from "express";
-import bodyParser from "body-parser";
+import fastify from "fastify";
 
 import authorize from "./src/authorize";
 import token from "./src/token";
 import redirect from "./src/redirect";
 
 const PORT = process.env.PORT || 5000;
-const server = express();
+const server = fastify();
 
 server
-  .get("/", (req, res) => res.send("Alive"))
+  .get("/", async (req, res) => "Alive")
   .get("/authorize", authorize)
   .get("/redirect", redirect)
-  .use(bodyParser.json())
-  .post("/token", token)
-  .listen(PORT, () => console.log(`Listening on ${PORT}`));
+  .post("/token", token);
+
+const start = async () => {
+  try {
+    await server.listen(PORT);
+  } catch (err) {
+    server.log.error(err);
+    process.exit(1);
+  }
+};
+start();

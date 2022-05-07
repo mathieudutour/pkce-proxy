@@ -1,8 +1,8 @@
-import { Request, Response } from "express";
+import type { FastifyRequest, FastifyReply } from "fastify";
 import { findByState } from "./store";
 
-export default function redirect(req: Request, res: Response) {
-  const { code, state, ...extra } = req.query;
+export default async function redirect(req: FastifyRequest, res: FastifyReply) {
+  const { code, state, ...extra } = req.query as Record<string, string>;
 
   const stored = findByState(state);
 

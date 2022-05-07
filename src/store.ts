@@ -29,7 +29,7 @@ export function add(
 }
 
 export function find(code: any, code_verifier: any) {
-  if (!code_verifier || !code) {
+  if (typeof code_verifier !== "string" || !code) {
     return;
   }
 

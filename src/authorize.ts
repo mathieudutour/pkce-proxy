@@ -1,10 +1,12 @@
-import { Request, Response } from "express";
+import type { FastifyRequest, FastifyReply } from "fastify";
 import { add } from "./store";
-import qs from "querystring";
 
 const authorizeURL = "https://api.notion.com/v1/oauth/authorize";
 
-export default function authorize(req: Request, res: Response) {
+export default async function authorize(
+  req: FastifyRequest,
+  res: FastifyReply
+) {
   const {
     client_id,
     redirect_uri,
@@ -12,7 +14,7 @@ export default function authorize(req: Request, res: Response) {
     code_challenge_method,
     state,
     ...extra
-  } = req.query;
+  } = req.query as Record<string, string>;
 
   add(client_id, redirect_uri, state, {
     code_challenge,
@@ -20,14 +22,14 @@ export default function authorize(req: Request, res: Response) {
   });
 
   const params = new URLSearchParams();
-  params.append("client_id", client_id as string);
-  params.append("state", state as string);
+  params.append("client_id", client_id);
+  params.append("state", state);
   params.append(
     "redirect_uri",
     `https://raycast-notion-pkce-proxy.herokuapp.com/redirect`
   );
   Object.keys(extra).forEach((k) => {
-    params.append(k, extra[k] as string);
+    params.append(k, extra[k]);
   });
 
   return res.redirect(307, `${authorizeURL}?${params.toString()}`);

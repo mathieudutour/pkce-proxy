@@ -10,6 +10,8 @@ export default function redirect(req: Request, res: Response) {
     return res.status(400).send("invalid_state");
   }
 
+  stored.code = code;
+
   const params = new URLSearchParams();
   params.append("code", code as string);
   params.append("state", state as string);

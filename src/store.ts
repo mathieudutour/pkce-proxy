@@ -3,6 +3,7 @@ type Store = {
   redirect_uri: any;
   state: any;
   pkce: { code_challenge: any; code_challenge_method: any };
+  code?: any;
   expiration: number;
 };
 
@@ -27,18 +28,17 @@ export function add(
   }, 500 * 1000);
 }
 
-export function find(client_id: any, redirect_uri: any, code_verifier: any) {
-  const candidates = Object.values(store).filter(
-    (x) => x.client_id === client_id && x.redirect_uri === redirect_uri
-  );
+export function find(code: any, code_verifier: any) {
+  const candidate = Object.values(store).find((x) => x.code === code);
 
-  const encoded = base64_urlencode(code_verifier);
-
-  return candidates.find((x) =>
-    x.pkce.code_challenge_method === "plain"
-      ? x.pkce.code_challenge === code_verifier
-      : x.pkce.code_challenge === encoded
-  );
+  if (
+    candidate &&
+    (candidate.pkce.code_challenge_method === "plain"
+      ? candidate.pkce.code_challenge === code_verifier
+      : candidate.pkce.code_challenge === base64_urlencode(code_verifier))
+  ) {
+    return candidate;
+  }
 }
 
 export function findByState(state: any) {

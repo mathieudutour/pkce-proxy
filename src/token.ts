@@ -5,9 +5,10 @@ const secret = "secret_8THB2z6RB1CvTc0sqIDditbyNWUqWlQs0f41Drikklx";
 const tokenURL = "https://api.notion.com/v1/oauth/token";
 
 export default function token(req: Request, res: Response) {
-  const { code_verifier, redirect_uri, client_id, ...extra } = req.body;
+  const { code_verifier, client_id, code, ...extra } = req.body;
+  console.log(req.body);
 
-  if (!find(client_id, redirect_uri, code_verifier)) {
+  if (!find(code, code_verifier)) {
     return res.status(400).send("invalid_grant");
   }
 

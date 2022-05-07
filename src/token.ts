@@ -22,9 +22,10 @@ export default async function token(req: FastifyRequest, res: FastifyReply) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      client_id,
+      // client_id,
       code,
-      ...extra,
+      //...extra,
+      grant_type: "authorization_code",
       redirect_uri: session.redirect_uri,
     }),
   });

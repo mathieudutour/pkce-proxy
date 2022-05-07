@@ -1,7 +1,6 @@
 import type { FastifyRequest, FastifyReply } from "fastify";
 import { add } from "./sessions";
-
-const authorizeURL = "https://api.notion.com/v1/oauth/authorize";
+import { AUTHORIZE_URL, PROXY_REDIRECT_URL } from "./constants";
 
 export default async function authorize(
   req: FastifyRequest,
@@ -24,13 +23,10 @@ export default async function authorize(
   const params = new URLSearchParams();
   params.append("client_id", client_id);
   params.append("state", state);
-  params.append(
-    "redirect_uri",
-    `https://raycast-notion-pkce-proxy.herokuapp.com/redirect`
-  );
+  params.append("redirect_uri", PROXY_REDIRECT_URL);
   Object.keys(extra).forEach((k) => {
     params.append(k, extra[k]);
   });
 
-  return res.redirect(307, `${authorizeURL}?${params.toString()}`);
+  return res.redirect(307, `${AUTHORIZE_URL}?${params.toString()}`);
 }

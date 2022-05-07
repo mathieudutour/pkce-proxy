@@ -1,15 +1,14 @@
 {
   "name": "pkce-proxy",
   "version": "0.1.0",
-  "description": "",
+  "description": "A barebones PKCE proxy to enable OAuth for OAuth providers that do not support PKC",
   "main": "dist/index.js",
   "engines": {
     "node": "18.x"
   },
   "scripts": {
     "start": "node .",
-    "build": "tsc",
-    "dev": "nodemon"
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",
@@ -20,9 +19,5 @@
   },
   "dependencies": {
     "fastify": "^3.29.0"
-  },
-  "nodemonConfig": {
-    "ext": "ts",
-    "exec": "npm run build && npm start"
   }
 }

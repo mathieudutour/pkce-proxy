@@ -1,35 +1,36 @@
-# typescript-getting-started
+# PKCE Proxy for Raycast
 
-A barebones TypeScript app using [Express 4](http://expressjs.com/).
+A barebones PKCE proxy to enable OAuth for OAuth providers that do not support PKCE.
+
+The proxy server has been tested with Notion but it may need some tweaks to adapt it to another provider.
 
 ## Running Locally
 
-Make sure you have [Node.js](http://nodejs.org/) and the [Heroku CLI](https://cli.heroku.com/) installed.
-
 ```sh
-$ git clone https://github.com/heroku/typescript-getting-started.git # or clone your own fork
-$ cd typescript-getting-started
-$ npm install
-$ npm run build
-$ npm start
+npm install
+npm run build
+npm start
 ```
 
-Your app should now be running on [localhost:5000](http://localhost:5000/).
+The proxy should now be running on [localhost:5000](http://localhost:5000/).
 
 ## Deploying to Heroku
 
-```
-$ heroku create
-$ git push heroku main
-$ heroku open
-```
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
 or
 
-[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+Make sure you have the [Heroku CLI](https://cli.heroku.com/) installed.
+
+```
+heroku create
+git push heroku main
+heroku open
+```
 
 ## Documentation
 
-For more information about using TypeScript on Heroku, see these Dev Center articles:
+For more information about OAuth with Raycast, see:
 
-- [Heroku Node.js Support](https://devcenter.heroku.com/articles/nodejs-support)
-- [Node.js on Heroku](https://devcenter.heroku.com/categories/nodejs)
+- [Raycast developer documentation](https://developers.raycast.com/api-reference/oauth)
+- [Raycast extension using this proxy](https://github.com/raycast/extensions/tree/main/extensions/notion)

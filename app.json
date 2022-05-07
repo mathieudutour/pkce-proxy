@@ -1,6 +1,20 @@
 {
-  "name": "Start on Heroku: TypeScript",
-  "description": "A barebones TypeScript app using Express 4",
-  "repository": "https://github.com/heroku/typescript-getting-started",
-  "keywords": ["node", "typescript", "express", "heroku"]
+  "name": "PKCE Proxy for Raycast",
+  "description": "A barebones PKCE proxy to enable OAuth for OAuth providers that do not support PKCE",
+  "repository": "https://github.com/mathieudutour/raycast-pkce-proxy",
+  "keywords": ["oauth", "pkce", "proxy", "raycast"],
+  "env": {
+    "PROXY_HOSTNAME": {
+      "description": "The hostname where the proxy is deployed (for example \"https://raycast-notion-pkce-proxy.herokuapp.com\")."
+    },
+    "AUTHORIZE_URL": {
+      "description": "The URL where redirect the user for the authorization (for example \"https://api.notion.com/v1/oauth/authorize\")."
+    },
+    "TOKEN_URL": {
+      "description": "The URL where we exchange a code for a token (for example \"https://api.notion.com/v1/oauth/token\")."
+    },
+    "CLIENT_SECRET": {
+      "description": "The client secret provided by the OAuth provider."
+    }
+  }
 }

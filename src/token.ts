@@ -1,8 +1,6 @@
 import type { FastifyRequest, FastifyReply } from "fastify";
 import { find } from "./sessions";
-
-const secret = "secret_8THB2z6RB1CvTc0sqIDditbyNWUqWlQs0f41Drikklx";
-const tokenURL = "https://api.notion.com/v1/oauth/token";
+import { TOKEN_URL, CLIENT_SECRET, PROXY_REDIRECT_URL } from "./constants";
 
 export default async function token(req: FastifyRequest, res: FastifyReply) {
   const { code_verifier, client_id, code, ...extra } = req.body as any;
@@ -10,22 +8,23 @@ export default async function token(req: FastifyRequest, res: FastifyReply) {
   const session = find(code, code_verifier);
 
   if (!session) {
-    return res.status(400).send("invalid_grant");
+    res.status(400);
+    return { error: "invalid_grant" };
   }
 
-  const response = await fetch(tokenURL, {
+  const response = await fetch(TOKEN_URL, {
     method: "POST",
     headers: {
-      Authorization: `Basic ${Buffer.from(`${client_id}:${secret}`).toString(
-        "base64"
-      )}`,
+      Authorization: `Basic ${Buffer.from(
+        `${client_id}:${CLIENT_SECRET}`
+      ).toString("base64")}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
       client_id,
       code,
       ...extra,
-      redirect_uri: `https://raycast-notion-pkce-proxy.herokuapp.com/redirect`,
+      redirect_uri: PROXY_REDIRECT_URL,
     }),
   });
 

@@ -1,3 +1,5 @@
+import crypto from "crypto";
+
 type Store = {
   client_id: any;
   redirect_uri: any;
@@ -41,8 +43,15 @@ export function find(code: any, code_verifier: any) {
   if (
     candidate &&
     (candidate.pkce.code_challenge_method === "plain"
-      ? candidate.pkce.code_challenge === code_verifier
-      : candidate.pkce.code_challenge === base64_urlencode(code_verifier))
+      ? candidate.pkce.code_challenge === base64_urlencode(code_verifier)
+      : candidate.pkce.code_challenge ===
+        crypto
+          .createHash("sha256")
+          .update(code_verifier)
+          .digest("base64")
+          .replace(/\+/g, "-")
+          .replace(/\//g, "_")
+          .replace(/=+$/, ""))
   ) {
     return candidate;
   }

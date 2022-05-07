@@ -29,6 +29,10 @@ export function add(
 }
 
 export function find(code: any, code_verifier: any) {
+  if (!code_verifier || !code) {
+    return;
+  }
+
   const candidate = Object.values(store).find((x) => x.code === code);
 
   if (

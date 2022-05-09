@@ -1,8 +1,21 @@
 # PKCE Proxy for Raycast
 
-A barebones PKCE proxy to enable OAuth for OAuth providers that do not support PKCE.
+A barebones proxy to enable the PKCE flow for OAuth providers that do not support PKCE.
 
 The proxy server has been tested with Notion but it may need some tweaks to adapt it to another provider.
+
+## Configuration
+
+The proxy uses environment variables to be as versatile as possible. You will need to provide a few for it to work.
+
+Here is an example using [Notion](https://notion.so) as the provider:
+
+```
+PROXY_HOSTNAME=https://your-proxy-domain
+CLIENT_SECRET=client-secret-provided-by-notion
+AUTHORIZE_URL=https://api.notion.com/v1/oauth/authorize
+TOKEN_URL=https://api.notion.com/v1/oauth/token
+```
 
 ## Running Locally
 

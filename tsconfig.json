@@ -4,13 +4,8 @@
     "module": "commonjs",
     "outDir": "./dist",
     "strict": true,
-    "target": "ES2019",
-
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "removeComments": true,
+    "target": "ES2021",
+    "esModuleInterop": true
   },
-  "include": [
-    "./index.ts"
-  ]
+  "include": ["./index.ts"]
 }

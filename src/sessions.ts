@@ -58,6 +58,10 @@ export function findByState(state: any) {
   return sessions[state];
 }
 
+export function consume(session: Session) {
+  delete sessions[session.state];
+}
+
 function base64_urlencode(str: string) {
   return Buffer.from(str)
     .toString("base64")

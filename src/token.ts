@@ -1,5 +1,5 @@
 import type { FastifyRequest, FastifyReply } from "fastify";
-import { find } from "./sessions";
+import { find, consume } from "./sessions";
 import { TOKEN_URL, CLIENT_SECRET, PROXY_REDIRECT_URL } from "./constants";
 
 export default async function token(req: FastifyRequest, res: FastifyReply) {
@@ -11,6 +11,8 @@ export default async function token(req: FastifyRequest, res: FastifyReply) {
     res.status(400);
     return { error: "invalid_grant" };
   }
+
+  consume(session);
 
   const response = await fetch(TOKEN_URL, {
     method: "POST",

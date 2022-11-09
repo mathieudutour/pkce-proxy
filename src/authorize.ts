@@ -23,10 +23,10 @@ export default async function authorize(
   const params = new URLSearchParams();
   params.append("client_id", client_id);
   params.append("state", state);
-  params.append("redirect_uri", PROXY_REDIRECT_URL);
   Object.keys(extra).forEach((k) => {
     params.append(k, extra[k]);
   });
+  params.set("redirect_uri", PROXY_REDIRECT_URL);
 
   return res.redirect(307, `${AUTHORIZE_URL}?${params.toString()}`);
 }

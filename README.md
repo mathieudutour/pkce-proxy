@@ -17,6 +17,8 @@ AUTHORIZE_URL=https://api.notion.com/v1/oauth/authorize
 TOKEN_URL=https://api.notion.com/v1/oauth/token
 ```
 
+If the provider supports refreshing tokens and the endpoint to refresh tokens is different from `TOKEN_URL`, you can specify `REFRESH_TOKEN_URL`.
+
 ## Running Locally
 
 ```sh

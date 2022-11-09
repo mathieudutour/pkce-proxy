@@ -1,7 +1,7 @@
 {
   "name": "PKCE Proxy for Raycast",
   "description": "A barebones PKCE proxy to enable OAuth for OAuth providers that do not support PKCE",
-  "repository": "https://github.com/mathieudutour/raycast-pkce-proxy",
+  "repository": "https://github.com/mathieudutour/pkce-proxy",
   "keywords": ["oauth", "pkce", "proxy", "raycast"],
   "env": {
     "PROXY_HOSTNAME": {

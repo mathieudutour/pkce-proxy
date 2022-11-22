@@ -13,6 +13,10 @@ const server = fastify();
 server
   .get("/", async (req, res) => {
     res.header("Content-Type", "text/html");
+    res.header(
+      "Strict-Transport-Security",
+      "max-age=31536000; includeSubDomains"
+    );
     res.send(`
     <titl>OAuth PKCE Proxy</titl>
     <h1>OAuth PKCE Proxy</h1>

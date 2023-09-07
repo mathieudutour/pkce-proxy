@@ -1,6 +1,11 @@
 import type { FastifyRequest, FastifyReply } from "fastify";
 import { URLSearchParams } from "url";
-import { REFRESH_TOKEN_URL, CLIENT_SECRET, JSON_OR_FORM } from "./constants";
+import {
+  REFRESH_TOKEN_URL,
+  CLIENT_SECRET,
+  JSON_OR_FORM,
+  PROXY_REDIRECT_URL,
+} from "./constants";
 
 export default async function refresh_token(
   req: FastifyRequest,
@@ -20,6 +25,7 @@ export default async function refresh_token(
         client_secret: CLIENT_SECRET,
         refresh_token,
         ...extra,
+        redirect_uri: PROXY_REDIRECT_URL,
       }),
     };
   } else if (JSON_OR_FORM === "form") {
@@ -30,6 +36,7 @@ export default async function refresh_token(
     Object.keys(extra).forEach((k) => {
       body.append(k, extra[k]);
     });
+    body.append("redirect_uri", PROXY_REDIRECT_URL);
 
     options = {
       body,

@@ -19,6 +19,8 @@ TOKEN_URL=https://api.notion.com/v1/oauth/token
 
 If the provider supports refreshing tokens and the endpoint to refresh tokens is different from `TOKEN_URL`, you can specify `REFRESH_TOKEN_URL`.
 
+If the provider expects the body of requests to be form encoded instead of JSON, you can set the `JSON_OR_FORM` to `"form"`.
+
 ## Running Locally
 
 ```sh

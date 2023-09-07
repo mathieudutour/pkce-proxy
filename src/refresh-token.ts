@@ -42,10 +42,6 @@ export default async function refresh_token(
   });
 
   res.status(response.status);
-  res.header(
-    "Strict-Transport-Security",
-    "max-age=31536000; includeSubDomains"
-  );
 
   return response.json();
 }

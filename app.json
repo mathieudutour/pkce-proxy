@@ -15,6 +15,12 @@
     },
     "CLIENT_SECRET": {
       "description": "The client secret provided by the OAuth provider."
+    },
+    "REFRESH_TOKEN_URL": {
+      "description": "The URL where we refresh a token (for example \"https://api.notion.com/v1/oauth/token\")."
+    },
+    "JSON_OR_FORM": {
+      "description": "Whether the OAuth provider expects the body to be JSON or form encoded (for example \"json\")."
     }
   }
 }

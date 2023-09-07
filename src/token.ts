@@ -57,10 +57,6 @@ export default async function token(req: FastifyRequest, res: FastifyReply) {
   });
 
   res.status(response.status);
-  res.header(
-    "Strict-Transport-Security",
-    "max-age=31536000; includeSubDomains"
-  );
 
   return response.json();
 }

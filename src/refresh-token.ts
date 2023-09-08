@@ -39,6 +39,9 @@ export default async function refresh_token(
     body.append("redirect_uri", PROXY_REDIRECT_URL);
 
     options = {
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
       body,
     };
   }

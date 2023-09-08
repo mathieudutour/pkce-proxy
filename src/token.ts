@@ -47,6 +47,9 @@ export default async function token(req: FastifyRequest, res: FastifyReply) {
     body.set("redirect_uri", PROXY_REDIRECT_URL);
 
     options = {
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
       body,
     };
   }

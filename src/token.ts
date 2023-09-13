@@ -8,17 +8,16 @@ import {
 } from "./constants";
 
 export default async function token(req: FastifyRequest, res: FastifyReply) {
-  console.log(req.body);
   const { code_verifier, client_id, code, ...extra } = req.body as any;
 
   const session = find(code, code_verifier);
 
-  // if (!session) {
-  //   res.status(400);
-  //   return { error: "invalid_grant" };
-  // }
+  if (!session) {
+    res.status(400);
+    return { error: "invalid_grant" };
+  }
 
-  // consume(session);
+  consume(session);
 
   let options: RequestInit = {};
 
@@ -43,6 +42,7 @@ export default async function token(req: FastifyRequest, res: FastifyReply) {
           `${client_id}:${CLIENT_SECRET}`
         ).toString("base64")}`,
         "Content-Type": "application/json",
+        Accept: "application/json",
       },
       body,
     };
@@ -59,6 +59,7 @@ export default async function token(req: FastifyRequest, res: FastifyReply) {
     options = {
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
+        Accept: "application/json",
       },
       body,
     };

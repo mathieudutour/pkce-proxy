@@ -19,6 +19,7 @@ export default async function refresh_token(
     options = {
       headers: {
         "Content-Type": "application/json",
+        Accept: "application/json",
       },
       body: JSON.stringify({
         client_id,
@@ -41,6 +42,7 @@ export default async function refresh_token(
     options = {
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
+        Accept: "application/json",
       },
       body,
     };

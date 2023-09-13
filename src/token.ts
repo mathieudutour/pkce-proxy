@@ -8,6 +8,7 @@ import {
 } from "./constants";
 
 export default async function token(req: FastifyRequest, res: FastifyReply) {
+  console.log(req.body);
   const { code_verifier, client_id, code, ...extra } = req.body as any;
 
   const session = find(code, code_verifier);

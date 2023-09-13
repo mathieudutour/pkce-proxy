@@ -22,6 +22,20 @@ export default async function token(req: FastifyRequest, res: FastifyReply) {
   let options: RequestInit = {};
 
   if (JSON_OR_FORM === "json") {
+    let body: string;
+    try {
+      body = JSON.stringify({
+        client_id,
+        code,
+        ...extra,
+        redirect_uri: PROXY_REDIRECT_URL,
+      });
+    } catch (e) {
+      console.error(e);
+      res.status(400);
+      return { error: "invalid_body" };
+    }
+
     options = {
       headers: {
         Authorization: `Basic ${Buffer.from(
@@ -29,12 +43,7 @@ export default async function token(req: FastifyRequest, res: FastifyReply) {
         ).toString("base64")}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        client_id,
-        code,
-        ...extra,
-        redirect_uri: PROXY_REDIRECT_URL,
-      }),
+      body,
     };
   } else if (JSON_OR_FORM === "form") {
     const body = new URLSearchParams();

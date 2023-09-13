@@ -12,12 +12,12 @@ export default async function token(req: FastifyRequest, res: FastifyReply) {
 
   const session = find(code, code_verifier);
 
-  if (!session) {
-    res.status(400);
-    return { error: "invalid_grant" };
-  }
+  // if (!session) {
+  //   res.status(400);
+  //   return { error: "invalid_grant" };
+  // }
 
-  consume(session);
+  // consume(session);
 
   let options: RequestInit = {};
 

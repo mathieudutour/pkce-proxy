@@ -26,6 +26,7 @@ export default async function token(req: FastifyRequest, res: FastifyReply) {
     try {
       body = JSON.stringify({
         client_id,
+        client_secret: CLIENT_SECRET,
         code,
         ...extra,
         redirect_uri: PROXY_REDIRECT_URL,
